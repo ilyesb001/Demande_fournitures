@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<odoo>
+
+<!-- ************************* WINDOW ACTION *************************-->
+
+    <record id="demande_fournitures_action" model="ir.actions.act_window">
+        <field name="name">demande fournitures</field>
+        <field name="res_model">demande.fournitures</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+<!-- ************************* MENUITEM *************************-->
+<menuitem
+id="prime_demande_fournitures_menu"
+name="Demandes fournitures"
+action="demande_fournitures_action"
+/>
+
+<!-- ************************* TREE VIEW *************************-->
+
+<record id='demande_fournitures_view_tree' model="ir.ui.view">
+    <field name="name">demande fournitures List</field>
+    <field name="model">demande.fournitures</field>
+    <field name="arch" type="xml">
+        <tree>
+
+            <field name="nom" />
+            <field name="state" />
+
+        </tree>
+    </field>
+</record>
+
+<!-- ************************* FORM VIEW *************************-->
+
+<record id="demande_fournitures_view_form" model="ir.ui.view">
+    <field name="name">demande fournitures form</field>
+    <field name="model">demande.fournitures</field>
+    <field name="arch" type="xml">
+        <form string="">
+            <sheet>
+                <group>
+                    <field name="nom" />
+                    <field name="state" />
+                    <field name="employer_id" />
+                    <field name="employer" />
+                    <field name="societe"/>
+                    <field name="direction"/>
+                    <field name="responsable"/>
+
+                </group>
+                <group>
+                    <field name="cat_id" />
+                    <field name="categ" />
+                </group>
+                <group>
+                    <field name="date_demande"/>
+                    <field name="date_validation"/>
+                    <field name="date_fin"/>
+
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+</odoo>
