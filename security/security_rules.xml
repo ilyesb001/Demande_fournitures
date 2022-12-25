@@ -1,0 +1,27 @@
+<odoo>
+
+ <record id="demande_vue_demandeur" model="ir.rule">
+    <field name="name">demande de fournitures demandeurs</field>
+    <field ref="model_demande_fournitures" name="model_id"/>
+    <!-- user can only see his created records -->
+    <field name="domain_force">[('create_uid','=',user.id)]</field>
+    <field name="groups" eval="[(4, ref('demande_fournitures.groupe_demandeur'))]"/>
+ </record>
+<record id="demande_vue_responsable" model="ir.rule">
+    <field name="name">demande de fournitures fait</field>
+    <field ref="model_demande_fournitures" name="model_id"/>
+    <!-- responsable can only see his employees  -->
+    <field name="domain_force">[('responsable.user_id.id','=',user.id)]</field>
+    <field name="groups" eval="[(4, ref('demande_fournitures.groupe_responsable'))]"/>
+</record>
+
+   
+<record id="demande_vue_gds" model="ir.rule">
+    <field name="name">demande de fournitures validée par le responsable</field>
+    <field ref="model_demande_fournitures" name="model_id"/>
+    <field name="domain_force">['|','|',('state','=','valider'),('state','=','refuser2'),('state','=','valider2')]</field>
+    <field name="groups" eval="[(4, ref('demande_fournitures.groupe_gds'))]"/>
+</record>
+
+
+</odoo>

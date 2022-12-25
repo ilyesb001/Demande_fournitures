@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<odoo>
+  <data>
+    <template id="report_fourniture">
+      <t t-call="web.html_container">
+        <!-- <div class="header">
+          <div class="col-6">
+            <strong>
+              <img src="pedagogique_fsei/static/description/icon.png" alt="Grapefruit slice atop a pile of other slices" style="width:120px;height:100px;"/>
+              <span style="font-size:20px;align:center">Universite Abdelhamid Ibn Badis</span>
+            </strong>
+          </div>
+        </div> -->
+        
+          <t t-foreach="docs" t-as="det">
+           <t t-call="demande_fournitures.custom_external_layout">
+            <div class="page">
+              <h2 style="margin-bottom:50px;">Rapport De Fourniture <span t-esc="det['reference']"/>
+              </h2>
+              <!-- <div>
+                <span t-esc="det['name']"/>
+              </div> -->
+              <div style="display:flex;">
+                <div style="margin-bottom:50px;">
+                  <p style="font-weight: bold;font-size:20px;"><strong>Demandeur:<span t-esc="det['employer']"/></strong></p>
+                </div>
+                <div style="margin-bottom:50px;">
+                  
+                  <p style="font-weight: bold;font-size:20px;"><strong>Etat De La Demande:<span t-esc="det['state']"/></strong></p>
+                </div>
+              </div>
+              <div style="margin-bottom:50px;">
+                
+                 <p style="font-weight: bold;font-size:20px;"><strong>Departement:<span t-esc="det['direction'].name"/></strong></p>
+              </div>
+              <div style="margin-bottom:50px;">
+                 <p style="font-weight: bold;font-size:20px;"><strong>Categorie Des Articles:<span t-esc="det['cat_id'].name"/></strong></p>
+              </div>
+              <div style="margin-bottom:50px;">
+                
+                 <p style="font-weight: bold;font-size:20px;"><strong>Date Demande:<span t-esc="det['date_demande']"/></strong></p>
+              </div>
+              
+              <div style="margin-bottom:50px;">
+                   <t t-if="det['date_validation']!=False">
+                          <p style="font-weight: bold;font-size:20px;"><strong>Date De Validation De Responsable:<span t-esc="det['date_validation']"/></strong></p>
+
+                   </t>
+              </div>
+              <div style="margin-bottom:50px;">
+                   <t t-if="det['date_fin']!=False">
+                          <p style="font-weight: bold;font-size:20px;"><strong>Date De Validation De GDS:<span t-esc="det['date_fin']"/></strong></p>
+
+                   </t>
+              </div>
+
+              <div style="margin-bottom:50px;">
+                
+                 <p style="font-weight: bold;font-size:20px;"><strong>Liste Des Articles:</strong></p>
+              </div>
+              <table class="table table-sm" style="border: 3px solid Black;border-collapse: collapse;">
+
+<thead>
+                  <tr style="background:#DCDCDC">
+                    <th>
+                      <div style="text-align:center;color:black;padding-top:10px;padding-bottom:10px;"><strong>Article</strong></div>
+                    </th>
+                    <th>
+                      <div style="text-align:center;color:black;padding-top:10px;padding-bottom:10px;"><strong>Quantite</strong></div>
+
+                    </th>
+                  </tr>
+                </thead>
+                <t t-foreach="det.fournitures_lines_ids" t-as="o">
+                  
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div style="text-align:center;">
+                            <!-- <span t-esc="o['article']"/> -->
+                            <p><span t-esc="o['article'].name" /></p>
+                        
+                        </div>
+                      </td>
+                      <td>
+                        <div style="text-align:center;">
+                            <!-- <span t-esc="o['qt']"/> -->
+                            <p><span t-esc="o['qte']" /></p>
+                        </div>
+                      </td>
+                  
+                    </tr>
+                  </tbody>
+                </t>
+              </table>
+              
+            </div>
+          </t>
+        </t>
+      </t>
+    </template>
+  </data>
+</odoo>

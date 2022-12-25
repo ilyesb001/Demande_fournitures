@@ -3,7 +3,7 @@
 
 <odoo>
 
-<!-- ************************* WINDOW ACTION *************************-->
+    <!-- ************************* WINDOW ACTION *************************-->
 
     <record id="demande_fournitures_action" model="ir.actions.act_window">
         <field name="name">demande fournitures</field>
@@ -11,58 +11,155 @@
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
-<!-- ************************* MENUITEM *************************-->
-<menuitem
-id="prime_demande_fournitures_menu"
-name="Demandes fournitures"
-action="demande_fournitures_action"
-/>
+    <!-- ************************* MENUITEM *************************-->
+    <menuitem
+        web_icon="demande_fournitures,static/description/icon.png"
+        id="prime_demande_fournitures_menu"
+        name="Demandes fournitures"
+        action="demande_fournitures_action"
+    />
 
-<!-- ************************* TREE VIEW *************************-->
+    <!-- ************************* TREE VIEW *************************-->
 
-<record id='demande_fournitures_view_tree' model="ir.ui.view">
-    <field name="name">demande fournitures List</field>
+    <record id='demande_fournitures_view_tree' model="ir.ui.view">
+        <field name="name">demande fournitures List</field>
+        <field name="model">demande.fournitures</field>
+        <field name="arch" type="xml">
+            <tree>
+
+                <field name="reference" />
+                <field name="state" />
+
+            </tree>
+        </field>
+    </record>
+
+    <!-- ************************* FORM VIEW *************************-->
+
+    <record id="demande_fournitures_view_form" model="ir.ui.view">
+        <field name="name">demande fournitures form</field>
+        <field name="model">demande.fournitures</field>
+        <field name="arch" type="xml">
+            <form string="">
+                         <header>
+                        <!-- ========== Demandeur =========== -->
+                        <button name="make_envoyer" type="object" string="Envoyer" groups="demande_fournitures.groupe_demandeur"/>
+                        <button name="make_annuler" type="object" string="Annuler" groups="demande_fournitures.groupe_demandeur"/>
+                        
+                        <!-- ========== Responsable =========== -->
+                        <button name="make_envoyer" type="object" string="Envoyer" groups="demande_fournitures.groupe_responsable"/>
+                        <button name="make_valide" type="object" string="Valider" groups="demande_fournitures.groupe_responsable"/>
+                        <button name="make_refuser" type="object" string="Refuser" groups="demande_fournitures.groupe_responsable"/>                    
+                        <button name="make_annuler" type="object" string="Annuler" groups="demande_fournitures.groupe_responsable"/>
+
+                        <!-- ========== GDS =================== -->
+                        <button name="make_valide2"  type="object" string="Valider" groups="demande_fournitures.groupe_gds"/>
+                        <button name="make_refuser2" type="object" string="Refuser" groups="demande_fournitures.groupe_gds"/>                    
+    
+                        <field name="state"     widget="statusbar" statusbar_visible="brouillons,envoyer,annuler"  readonly="1" />
+                    </header>
+
+                <sheet>
+                    <center>
+                        <field name="fields_image" widget="image" style="width:10%" />
+                    </center>
+                    <div class="oe_button_box" name="button_box">
+                        
+
+                    </div>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="reference" readonly="1"/>
+                                </h1>
+                            </div>
+                    <group>
+                        <field name="employer_id" />
+                        <field name="employer" />
+                        <field name="societe" />
+                        <field name="direction" />
+                        <field name="responsable" />
+                        
+                    </group>
+                    <group>
+                        <field name="cat_id" />
+                    </group>
+                    <group>
+                        <field name="date_demande"/>
+                        <field name="date_validation"/>
+                        <field name="date_fin"/>
+                    </group>
+                    <notebook>
+                        <page string="Product">
+                            <field name="fournitures_lines_ids">
+                                <tree editable="top">
+                                    <field name="article" />
+                                    <field name="qte" />
+                                </tree>
+                                <form>
+                                    <field name="article" />
+                                    <field name="qte" />
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <footer>
+
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+<!-- ********************************** KANBAN VIEW ********************************** -->
+<record id="view_student_kanban" model="ir.ui.view">
+    <field name="name">demande.fournitures.kanban</field>
     <field name="model">demande.fournitures</field>
     <field name="arch" type="xml">
-        <tree>
+        <kanban>
+            <field name="fields_image" />
+            <field name="employer"/>
+            <field name="responsable"/>
+            <field name="societe"/>
+            <field name="date_demande"/>
+            <field name="id"/>
 
-            <field name="nom" />
-            <field name="state" />
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click"  style="background-color:grey" >
+                        <div class="o_kanban_image">                             
+                                <img class="o_kanban_imager_inner_pic"
+                                t-att-src="kanban_image('demande.fournitures', 'fields_image', record.id.raw_value)"/>
+                        
+                        </div>
+                        <div class="oe_kanban_details" >
+                            <ul>
+                            <li style="color:white">
+                                <strong>Employer :</strong> <field name="employer" />
+                            </li>
+                            <li style="color:white">
+                                <strong>responsable :</strong> <field name="responsable"/>
+                            </li>
+                            <li style="color:white">
 
-        </tree>
+                                <strong>societe :</strong> <field name="societe"/>
+
+                            </li>
+
+                            <li style="color:white">
+                                <strong>Date demande :</strong> <field name="date_demande"/>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
     </field>
 </record>
 
-<!-- ************************* FORM VIEW *************************-->
 
-<record id="demande_fournitures_view_form" model="ir.ui.view">
-    <field name="name">demande fournitures form</field>
-    <field name="model">demande.fournitures</field>
-    <field name="arch" type="xml">
-        <form string="">
-            <sheet>
-                <group>
-                    <field name="nom" />
-                    <field name="state" />
-                    <field name="employer_id" />
-                    <field name="employer" />
-                    <field name="societe"/>
-                    <field name="direction"/>
-                    <field name="responsable"/>
 
-                </group>
-                <group>
-                    <field name="cat_id" />
-                    <field name="categ" />
-                </group>
-                <group>
-                    <field name="date_demande"/>
-                    <field name="date_validation"/>
-                    <field name="date_fin"/>
 
-                </group>
-            </sheet>
-        </form>
-    </field>
-</record>
 </odoo>

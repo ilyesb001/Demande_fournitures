@@ -1,2 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 acl_demande_fournitures,demande.fournitures default,model_demande_fournitures,,1,1,1,1
+acl_fournitures_lines,fournitures.acl_fournitures_lines default,model_fournitures_lines,,1,1,1,1
+acl_fournitures_demandeur,demande.fournitures_demandeur,model_demande_fournitures,groupe_demandeur,1,1,1,1
+acl_fournitures_responsable,demande.fournitures_responsable,model_demande_fournitures,groupe_responsable,1,1,1,1
+acl_fournitures_gds,demande.fournitures_gds,model_demande_fournitures,groupe_gds,1,1,1,1

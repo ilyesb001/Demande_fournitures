@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- 
+    <record model="ir.module.category" id="module_category_df">
+        <field name="name">Demande de fournitures access</field>
+    </record>
+
+    <record model="ir.module.category" id="">
+        <field name="name">Demande de fournitures</field>
+        <field name="parent" ref="module_category_df" />
+        <field name="sequence">1</field>
+        <field name="display_name">hello</field>
+    </record> -->
+
+    <record id="groupe_demandeur" model="res.groups">
+        <field name="name">Demandeur</field>
+        <field name="category_id"
+        ref=""/>
+        <field name="implied_ids"
+        eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    <record id="groupe_responsable" model="res.groups">
+        <field name="name">Responsable</field>
+        <field name="category_id"     
+        ref=""/>
+        <field name="implied_ids"
+        eval="[(4, ref('base.group_user'))]"/>
+    </record>
+        
+    <record id="groupe_gds" model="res.groups">
+        <field name="name">GDS</field>
+        <field name="category_id"
+        ref=""/>
+        <field name="implied_ids"
+        eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo>
