@@ -9,7 +9,7 @@ Création du module demande fourniture:
     • Lors de la validation, la demande sera terminé.
     • Dans le cas d’un refus, une convention d’achats sera créé pour demander l’achats de nouvelles articles.
     • La demande peut étre terminé seuelement si les bons de commande de la convention d’achat (sorties) sont fait.
-
+    
     1. Créer un nouveau module demande fourniture.
     2. Dépend sur le module “base”, “achats” et “hr”.
     3. Créer un menu niveau module (top level) avec icon qui ouvre une vue kanban, list et formulaire.
@@ -39,6 +39,7 @@ Création du module demande fourniture:
     15. Le GDS peut voir seulement les demandes validés par le responsible
     16. Un administrateur peut voir toutes les demandes
     17. Ajouter Un état d’impression (report) en interne pour la demande de fourniture
+    18. le responsable peut seulement faire des demandes pour ses employer
 
 NB:
     • Travaillez avec GIT si possible.
